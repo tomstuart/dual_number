@@ -134,6 +134,18 @@ RSpec.describe 'dual numbers' do
       end
     end
 
+    describe 'unary negation' do
+      let(:result) { -DualNumber(2, 3) }
+
+      it 'negates the real part' do
+        expect(result.real).to eq(-2)
+      end
+
+      it 'negates the dual part' do
+        expect(result.dual).to eq(-3)
+      end
+    end
+
     describe 'automatic coercion' do
       context 'of the left operand' do
         let(:a) { 2.0 }

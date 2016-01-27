@@ -51,6 +51,10 @@ class DualNumber
     end
   end
 
+  def -@
+    self * -1
+  end
+
   def coerce(other)
     [DualNumber(other), self]
   end
