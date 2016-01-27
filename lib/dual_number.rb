@@ -42,6 +42,10 @@ class DualNumber
       real: real / other.real,
       dual: (dual * other.real - real * other.dual) / (other.real * other.real)
   end
+
+  def coerce(other)
+    [DualNumber(other), self]
+  end
 end
 
 module Kernel

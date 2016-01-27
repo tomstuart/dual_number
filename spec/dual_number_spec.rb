@@ -133,5 +133,17 @@ RSpec.describe 'dual numbers' do
         expect(result.dual).to be_roughly ((3.0 * 5.0) - (2.0 * 7.0)) / (5.0 * 5.0)
       end
     end
+
+    describe 'automatic coercion' do
+      context 'of the left operand' do
+        let(:a) { 2.0 }
+        let(:b) { DualNumber(3.0, 5.0) }
+
+        specify { expect(a + b).to eq DualNumber(a) + b }
+        specify { expect(a - b).to eq DualNumber(a) - b }
+        specify { expect(a * b).to eq DualNumber(a) * b }
+        specify { expect(a / b).to eq DualNumber(a) / b }
+      end
+    end
   end
 end
