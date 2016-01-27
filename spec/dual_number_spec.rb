@@ -84,4 +84,54 @@ RSpec.describe 'dual numbers' do
       end
     end
   end
+
+  describe 'arithmetic' do
+    describe 'addition' do
+      let(:result) { DualNumber(2, 3) + DualNumber(5, 7) }
+
+      it 'adds the real parts' do
+        expect(result.real).to eq 2 + 5
+      end
+
+      it 'adds the dual parts' do
+        expect(result.dual).to eq 3 + 7
+      end
+    end
+
+    describe 'subtraction' do
+      let(:result) { DualNumber(2, 3) - DualNumber(5, 7) }
+
+      it 'subtracts the real parts' do
+        expect(result.real).to eq 2 - 5
+      end
+
+      it 'subtracts the dual parts' do
+        expect(result.dual).to eq 3 - 7
+      end
+    end
+
+    describe 'multiplication' do
+      let(:result) { DualNumber(2, 3) * DualNumber(5, 7) }
+
+      it 'multiplies the real parts' do
+        expect(result.real).to eq 2 * 5
+      end
+
+      it 'multiplies opposite parts and sums them to get the dual part' do
+        expect(result.dual).to eq (2 * 7) + (3 * 5)
+      end
+    end
+
+    describe 'division' do
+      let(:result) { DualNumber(2.0, 3.0) / DualNumber(5.0, 7.0) }
+
+      it 'divides the real parts' do
+        expect(result.real).to be_roughly 2.0 / 5.0
+      end
+
+      it 'multiplies opposite parts, subtracts them and divides by the square of the real divisor to get the dual part' do
+        expect(result.dual).to be_roughly ((3.0 * 5.0) - (2.0 * 7.0)) / (5.0 * 5.0)
+      end
+    end
+  end
 end
