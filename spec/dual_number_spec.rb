@@ -223,5 +223,68 @@ RSpec.describe 'dual numbers' do
       specify { expect(position_at(time: DualNumber(Math::PI, 1)).dual).to be_roughly 0 }
       specify { expect(position_at(time: DualNumber(3 * (Math::PI / 2), 1)).dual).to be_roughly 1 }
     end
+
+    describe 'natural exponential' do
+      def position_at(time:)
+        Math.exp(time)
+      end
+
+      specify { expect(position_at(time: 0)).to be_roughly Math::E ** 0 }
+      specify { expect(position_at(time: 1)).to be_roughly Math::E ** 1 }
+      specify { expect(position_at(time: 2)).to be_roughly Math::E ** 2 }
+      specify { expect(position_at(time: 3)).to be_roughly Math::E ** 3 }
+
+      specify { expect(position_at(time: DualNumber(0, 1)).real).to be_roughly Math::E ** 0 }
+      specify { expect(position_at(time: DualNumber(1, 1)).real).to be_roughly Math::E ** 1 }
+      specify { expect(position_at(time: DualNumber(2, 1)).real).to be_roughly Math::E ** 2 }
+      specify { expect(position_at(time: DualNumber(3, 1)).real).to be_roughly Math::E ** 3 }
+
+      specify { expect(position_at(time: DualNumber(0, 1)).dual).to be_roughly Math::E ** 0 }
+      specify { expect(position_at(time: DualNumber(1, 1)).dual).to be_roughly Math::E ** 1 }
+      specify { expect(position_at(time: DualNumber(2, 1)).dual).to be_roughly Math::E ** 2 }
+      specify { expect(position_at(time: DualNumber(3, 1)).dual).to be_roughly Math::E ** 3 }
+    end
+
+    describe 'natural logarithm' do
+      def position_at(time:)
+        Math.log(time)
+      end
+
+      specify { expect(position_at(time: Math::E ** 0)).to be_roughly 0 }
+      specify { expect(position_at(time: Math::E ** 1)).to be_roughly 1 }
+      specify { expect(position_at(time: Math::E ** 2)).to be_roughly 2 }
+      specify { expect(position_at(time: Math::E ** 3)).to be_roughly 3 }
+
+      specify { expect(position_at(time: DualNumber(Math::E ** 0, 1)).real).to be_roughly 0 }
+      specify { expect(position_at(time: DualNumber(Math::E ** 1, 1)).real).to be_roughly 1 }
+      specify { expect(position_at(time: DualNumber(Math::E ** 2, 1)).real).to be_roughly 2 }
+      specify { expect(position_at(time: DualNumber(Math::E ** 3, 1)).real).to be_roughly 3 }
+
+      specify { expect(position_at(time: DualNumber(Math::E ** 0, 1)).dual).to be_roughly Math::E ** 0 }
+      specify { expect(position_at(time: DualNumber(Math::E ** 1, 1)).dual).to be_roughly Math::E ** -1 }
+      specify { expect(position_at(time: DualNumber(Math::E ** 2, 1)).dual).to be_roughly Math::E ** -2 }
+      specify { expect(position_at(time: DualNumber(Math::E ** 3, 1)).dual).to be_roughly Math::E ** -3 }
+    end
+
+    describe 'square root' do
+      def position_at(time:)
+        Math.sqrt(time)
+      end
+
+      specify { expect(position_at(time: 0 ** 2)).to be_roughly 0 }
+      specify { expect(position_at(time: 1 ** 2)).to be_roughly 1 }
+      specify { expect(position_at(time: 2 ** 2)).to be_roughly 2 }
+      specify { expect(position_at(time: 3 ** 2)).to be_roughly 3 }
+
+      specify { expect(position_at(time: DualNumber(0 ** 2, 1)).real).to be_roughly 0 }
+      specify { expect(position_at(time: DualNumber(1 ** 2, 1)).real).to be_roughly 1 }
+      specify { expect(position_at(time: DualNumber(2 ** 2, 1)).real).to be_roughly 2 }
+      specify { expect(position_at(time: DualNumber(3 ** 2, 1)).real).to be_roughly 3 }
+
+      specify { expect(position_at(time: DualNumber(0 ** 2, 1)).dual).to eq 1.0 / 0 }
+      specify { expect(position_at(time: DualNumber(1 ** 2, 1)).dual).to be_roughly 1.0 / 2 }
+      specify { expect(position_at(time: DualNumber(2 ** 2, 1)).dual).to be_roughly 1.0 / 4 }
+      specify { expect(position_at(time: DualNumber(3 ** 2, 1)).dual).to be_roughly 1.0 / 6 }
+    end
   end
 end

@@ -106,4 +106,22 @@ Math.singleton_class.prepend Module.new {
       real: cos(x.real),
       dual: -x.dual * sin(x.real)
   end
+
+  def_for_dual_number :exp do |x|
+    DualNumber.new \
+      real: exp(x.real),
+      dual: exp(x.real) * x.dual
+  end
+
+  def_for_dual_number :log do |x, base = Math::E|
+    DualNumber.new \
+      real: log(x.real, base),
+      dual: x.dual / (x.real * log(base))
+  end
+
+  def_for_dual_number :sqrt do |x|
+    DualNumber.new \
+      real: sqrt(x.real),
+      dual: x.dual / (2 * sqrt(x.real))
+  end
 }
