@@ -58,4 +58,30 @@ RSpec.describe 'dual numbers' do
     specify { expect(DualNumber(2, 3).inspect).to eq '(2+3ε)' }
     specify { expect(DualNumber(2, -3).inspect).to eq '(2-3ε)' }
   end
+
+  describe 'equality' do
+    context 'when the real and dual parts are equal' do
+      it 'returns true' do
+        expect(DualNumber(2, 3)).to eq DualNumber(2, 3)
+      end
+    end
+
+    context 'when the real parts are not equal' do
+      it 'returns false' do
+        expect(DualNumber(2, 3)).not_to eq DualNumber(5, 3)
+      end
+    end
+
+    context 'when the dual parts are not equal' do
+      it 'returns false' do
+        expect(DualNumber(2, 3)).not_to eq DualNumber(2, 5)
+      end
+    end
+
+    context 'when the other object is not a dual number' do
+      it 'returns false' do
+        expect(DualNumber(2, 3)).not_to eq 5
+      end
+    end
+  end
 end

@@ -14,6 +14,10 @@ class DualNumber
   def inspect
     "(#{to_s})"
   end
+
+  def ==(other)
+    other.instance_of?(DualNumber) && [real, dual] == [other.real, other.dual]
+  end
 end
 
 module Kernel
