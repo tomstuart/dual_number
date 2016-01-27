@@ -19,32 +19,46 @@ class DualNumber
     other.instance_of?(DualNumber) && [real, dual] == [other.real, other.dual]
   end
 
-  def +(other)
-    DualNumber.new \
-      real: real + other.real,
-      dual: dual + other.dual
+  def +(argument)
+    with_dual_number(argument) do |other|
+      DualNumber.new \
+        real: real + other.real,
+        dual: dual + other.dual
+    end
   end
 
-  def -(other)
-    DualNumber.new \
-      real: real - other.real,
-      dual: dual - other.dual
+  def -(argument)
+    with_dual_number(argument) do |other|
+      DualNumber.new \
+        real: real - other.real,
+        dual: dual - other.dual
+    end
   end
 
-  def *(other)
-    DualNumber.new \
-      real: real * other.real,
-      dual: real * other.dual + dual * other.real
+  def *(argument)
+    with_dual_number(argument) do |other|
+      DualNumber.new \
+        real: real * other.real,
+        dual: real * other.dual + dual * other.real
+    end
   end
 
-  def /(other)
-    DualNumber.new \
-      real: real / other.real,
-      dual: (dual * other.real - real * other.dual) / (other.real * other.real)
+  def /(argument)
+    with_dual_number(argument) do |other|
+      DualNumber.new \
+        real: real / other.real,
+        dual: (dual * other.real - real * other.dual) / (other.real * other.real)
+    end
   end
 
   def coerce(other)
     [DualNumber(other), self]
+  end
+
+  private
+
+  def with_dual_number(argument)
+    yield DualNumber(argument)
   end
 end
 

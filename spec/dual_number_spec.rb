@@ -144,6 +144,16 @@ RSpec.describe 'dual numbers' do
         specify { expect(a * b).to eq DualNumber(a) * b }
         specify { expect(a / b).to eq DualNumber(a) / b }
       end
+
+      context 'of the right operand' do
+        let(:a) { DualNumber(2.0, 3.0) }
+        let(:b) { 5.0 }
+
+        specify { expect(a + b).to eq a + DualNumber(b) }
+        specify { expect(a - b).to eq a - DualNumber(b) }
+        specify { expect(a * b).to eq a * DualNumber(b) }
+        specify { expect(a / b).to eq a / DualNumber(b) }
+      end
     end
   end
 end
