@@ -50,4 +50,12 @@ RSpec.describe 'dual numbers' do
       end
     end
   end
+
+  describe 'string representation' do
+    specify { expect(DualNumber(2, 3).to_s).to eq '2+3ε' }
+    specify { expect(DualNumber(2, -3).to_s).to eq '2-3ε' }
+
+    specify { expect(DualNumber(2, 3).inspect).to eq '(2+3ε)' }
+    specify { expect(DualNumber(2, -3).inspect).to eq '(2-3ε)' }
+  end
 end

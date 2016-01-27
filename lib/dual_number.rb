@@ -6,6 +6,14 @@ class DualNumber
     self.real = real
     self.dual = dual
   end
+
+  def to_s
+    [real, (dual < 0 ? '-' : '+'), dual.abs, 'ε'].join
+  end
+
+  def inspect
+    "(#{to_s})"
+  end
 end
 
 module Kernel
