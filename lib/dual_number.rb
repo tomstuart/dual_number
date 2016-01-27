@@ -55,6 +55,12 @@ class DualNumber
     self * -1
   end
 
+  def **(power)
+    DualNumber.new \
+      real: real ** power,
+      dual: power * dual * (real ** (power - 1))
+  end
+
   def coerce(other)
     [DualNumber(other), self]
   end

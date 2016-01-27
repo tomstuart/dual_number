@@ -146,6 +146,18 @@ RSpec.describe 'dual numbers' do
       end
     end
 
+    describe 'exponentiation' do
+      let(:result) { DualNumber(2, 3) ** 5 }
+
+      it 'raises the real part to the power' do
+        expect(result.real).to eq 32
+      end
+
+      it 'multiplies the power, the dual part and the real part raised to the previous power to get the dual part' do
+        expect(result.dual).to eq 240
+      end
+    end
+
     describe 'automatic coercion' do
       context 'of the left operand' do
         let(:a) { 2.0 }
