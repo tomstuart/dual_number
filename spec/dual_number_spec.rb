@@ -180,4 +180,48 @@ RSpec.describe 'dual numbers' do
       end
     end
   end
+
+  describe 'mathematical functions' do
+    describe 'sine' do
+      def position_at(time:)
+        Math.sin(time)
+      end
+
+      specify { expect(position_at(time: 0)).to be_roughly 0 }
+      specify { expect(position_at(time: Math::PI / 2)).to be_roughly 1 }
+      specify { expect(position_at(time: Math::PI)).to be_roughly 0 }
+      specify { expect(position_at(time: 3 * (Math::PI / 2))).to be_roughly(-1) }
+
+      specify { expect(position_at(time: DualNumber(0, 1)).real).to be_roughly 0 }
+      specify { expect(position_at(time: DualNumber(Math::PI / 2, 1)).real).to be_roughly 1 }
+      specify { expect(position_at(time: DualNumber(Math::PI, 1)).real).to be_roughly 0 }
+      specify { expect(position_at(time: DualNumber(3 * (Math::PI / 2), 1)).real).to be_roughly(-1) }
+
+      specify { expect(position_at(time: DualNumber(0, 1)).dual).to be_roughly 1 }
+      specify { expect(position_at(time: DualNumber(Math::PI / 2, 1)).dual).to be_roughly 0 }
+      specify { expect(position_at(time: DualNumber(Math::PI, 1)).dual).to be_roughly(-1) }
+      specify { expect(position_at(time: DualNumber(3 * (Math::PI / 2), 1)).dual).to be_roughly 0 }
+    end
+
+    describe 'cosine' do
+      def position_at(time:)
+        Math.cos(time)
+      end
+
+      specify { expect(position_at(time: 0)).to be_roughly 1 }
+      specify { expect(position_at(time: Math::PI / 2)).to be_roughly 0 }
+      specify { expect(position_at(time: Math::PI)).to be_roughly(-1) }
+      specify { expect(position_at(time: 3 * (Math::PI / 2))).to be_roughly 0 }
+
+      specify { expect(position_at(time: DualNumber(0, 1)).real).to be_roughly 1 }
+      specify { expect(position_at(time: DualNumber(Math::PI / 2, 1)).real).to be_roughly 0 }
+      specify { expect(position_at(time: DualNumber(Math::PI, 1)).real).to be_roughly(-1) }
+      specify { expect(position_at(time: DualNumber(3 * (Math::PI / 2), 1)).real).to be_roughly 0 }
+
+      specify { expect(position_at(time: DualNumber(0, 1)).dual).to be_roughly 0 }
+      specify { expect(position_at(time: DualNumber(Math::PI / 2, 1)).dual).to be_roughly(-1) }
+      specify { expect(position_at(time: DualNumber(Math::PI, 1)).dual).to be_roughly 0 }
+      specify { expect(position_at(time: DualNumber(3 * (Math::PI / 2), 1)).dual).to be_roughly 1 }
+    end
+  end
 end

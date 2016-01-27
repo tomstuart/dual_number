@@ -82,3 +82,28 @@ module Kernel
     end
   end
 end
+
+Math.singleton_class.prepend Module.new {
+  def self.def_for_dual_number(method_name, &block)
+    define_method method_name do |arg, *args|
+      case arg
+      when DualNumber
+        instance_exec arg, *args, &block
+      else
+        super arg, *args
+      end
+    end
+  end
+
+  def_for_dual_number :sin do |x|
+    DualNumber.new \
+      real: sin(x.real),
+      dual: x.dual * cos(x.real)
+  end
+
+  def_for_dual_number :cos do |x|
+    DualNumber.new \
+      real: cos(x.real),
+      dual: -x.dual * sin(x.real)
+  end
+}
