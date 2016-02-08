@@ -125,3 +125,5 @@ Math.singleton_class.prepend Module.new {
       dual: x.dual / (2 * sqrt(x.real))
   end
 }
+
+require 'dual_number/version'
