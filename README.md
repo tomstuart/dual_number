@@ -1,5 +1,7 @@
 # dual_number
 
+![](https://github.com/tomstuart/dual_number/workflows/Ruby/badge.svg)
+
 This library provides a Ruby implementation of [dual numbers](https://en.wikipedia.org/wiki/Automatic_differentiation), which are useful for forward mode [automatic differentiation](https://en.wikipedia.org/wiki/Automatic_differentiation).
 
 It is intended to accompany the article [“Automatic differentiation in Ruby”](http://codon.com/automatic-differentiation-in-ruby).
